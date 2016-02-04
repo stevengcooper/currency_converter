@@ -1,36 +1,36 @@
 class Currency
-  attr_accessor :amount, :currency_code
+  attr_accessor :amount, :code
 
-  def initialize(amount, currency_code)
-    @currency_code = currency_code.to_sym
-    @amount = amount.to_f
+  def initialize(code, amount)
+    @code = code
+    @amount = amount
   end
 
-  def inside(other_amount, currency_code)
-    @amount
-    @currency_code
+  # def inside(code, amount)
+  #   @amount
+  #   @code
+  # end
+
+  def equal(other)
+    @code == other.code && @amount == other.amount
+    puts "DifferentCurrencyCodeError" if @code != other_code.code
   end
 
-  def equal(other_code, other_amount)
-    if @currency_code == other_code.inside.to_sym && @amount == other_amount.inside
+  def +(other)
+    @amount + other.amount if @code == other.code
   end
 
-  def code_check(other_code)
-    @currency_code == other_code.inside
-  end
-
-  def +(other_amount, other_code)
-    @amount + other_amount.inside if other_code.inside.code_check
-  end
-
-  def -(other_amount, other_code)
-    @amount - other_amount.inside if other_code.inside.code_check
-
-  def *(other_amount, other_code)
-    @amount * other_amount.inside if other_code.inside.code_check
-  end
+  # def -(other_amount, other_code)
+  #   @amount - other_amount.inside if other_code.inside.check
+  #
+  # def *(other_amount, other_code)
+  #   @amount * other_amount.inside if other_code.inside.check
+  # end
 end
-end
-# 
-# dollar = Currency.new(:USD, 500)
-end
+
+#
+dollar = Currency.new(:USD, 500)
+c = Currency.new(:USD, 600.08)
+puts c.amount
+puts c.code
+puts c + dollar
