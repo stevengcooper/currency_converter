@@ -17,14 +17,6 @@ class Currency
     end
   end
 
-  # def currency_error(other)
-  #   if @code != other.code
-  #     raise DifferentCurrencyCodeError.new("Currency codes are not the same.", "code")
-  #   else
-  #     true
-  #   end
-  # end
-
   def +(other)
     if @code == other.code
       @amount = @amount + other.amount
