@@ -7,26 +7,25 @@ class Currency
   end
 
   def error(other)
-    if @code != other.code
-      puts "DifferentCurrencyCodeError"
+    puts "DifferentCurrencyCodeError" if @code != other.code
   end
 
   def +(other)
-    @amount + other.amount if other.equal_to
+    @amount + other.amount if other.error
   end
 
   def -(other)
-    @amount - other.amount if other.code.equal_to
-
-  def *(other)
-    @amount * other.amount if other_code.check
+    @amount - other.amount if other.error
   end
+  #
+  # def *(other)
+  #   @amount * other.amount if other_code.error
+  # end
 end
 
-#
 a = Currency.new(:USSR, 500)
 c = Currency.new(:USD, 600.08)
 puts c.amount
 puts c.code
 puts c.amount + a.amount
-end
+puts a.amount - c.amount
