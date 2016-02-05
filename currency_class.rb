@@ -1,4 +1,4 @@
-# require './ DifferentCurrencyCodeError'
+# require './ DifferentCurrencyCodecurrency_error'
 # Currency < DifferentCurrencyCodeError
 
 class Currency
@@ -8,7 +8,8 @@ class Currency
     @code = code
     @amount = amount
   end
-  # def error(other)
+
+  # def currency_error(other)
   #   if @code != other.code
   #     error_fixed = false
   #     begin
@@ -24,23 +25,34 @@ class Currency
   end
 
   def +(other)
-    @amount + other.amount if other.currency_error
+    if @code == other.code
+      @amount + other.amount
+    else
+      other.currency_error
+    end
   end
 
   def -(other)
-    @amount - other.amount if other.currency_error
+    if @code == other.code
+      @amount - other.amount
+    else
+      other.currency_error
+    end
   end
 
   def *(other)
-    @amount * other.amount if other.currency_error
+    if @code == other.code
+      @amount * other.amount
+    else
+      other.currency_error
+      puts "WARNING!!!!!!!!"
+    end
   end
 end
 
 a = Currency.new(:NAD, 500)
 c = Currency.new(:USD, 600.08)
 d = Currency.new(:USD, 10000)
-puts c.amount
-puts c.code
-puts c.amount + d.amount
 puts c.amount - d.amount
 puts c.amount * d.amount
+puts c.amount + d.amount
