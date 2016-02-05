@@ -1,4 +1,4 @@
-# require './ DifferentCurrencyCodecurrency_error'
+require './ error_class.rb'
 # Currency < DifferentCurrencyCodeError
 
 class Currency
