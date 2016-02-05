@@ -9,6 +9,13 @@ class Currency
     @amount = amount
   end
 
+  def ==(other)
+    if @code == other.code && @amount == other.code
+      true
+    else
+      false
+    end
+  end
   # def currency_error(other)
   #   if @code != other.code
   #     error_fixed = false
