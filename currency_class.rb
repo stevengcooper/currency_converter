@@ -1,4 +1,4 @@
-require './ error_class.rb'
+require './error_class.rb'
 # Currency < DifferentCurrencyCodeError
 
 class Currency
@@ -12,30 +12,24 @@ class Currency
   def ==(other)
     if @code == other.code && @amount == other.code
       true
-    else
+    elsif @code != other.code && @amount != other.amount
       false
     end
   end
-  # def currency_error(other)
-  #   if @code != other.code
-  #     error_fixed = false
-  #     begin
-  #       raise "DifferentCurrencyCodeError" unless  error_fixed
-  #     rescue
-  #       error_fixed = true
-  #       retry
-  #     end
-  #   end
-  # end
-  def currency_error(value)
-    raise DifferentCurrencyCodeError, 'Currencies do not match.' if (@code == other.code) == false
+
+  def currency_error(other)
+    if @code != other.code
+      raise DifferentCurrencyCodeError.new("Currency codes are not the same.", "code")
+    else
+      true
+    end
   end
 
   def +(other)
     if @code == other.code
       @amount + other.amount
     else
-      other.currency_error
+      raise DifferentCurrencyCodeError
     end
   end
 
@@ -43,7 +37,7 @@ class Currency
     if @code == other.code
       @amount - other.amount
     else
-      other.currency_error
+      raise DifferentCurrencyCodeError
     end
   end
 
@@ -51,8 +45,7 @@ class Currency
     if @code == other.code
       @amount * other.amount
     else
-      other.currency_error
-      puts "WARNING!!!!!!!!"
+      raise DifferentCurrencyCodeError
     end
   end
 end
@@ -60,6 +53,6 @@ end
 a = Currency.new(:NAD, 500)
 c = Currency.new(:USD, 600.08)
 d = Currency.new(:USD, 10000)
-puts c.amount - d.amount
-puts c.amount * d.amount
-puts c.amount + d.amount
+puts d - a
+puts c * 45
+puts c + d

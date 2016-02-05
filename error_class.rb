@@ -1,8 +1,6 @@
 class DifferentCurrencyCodeError < StandardError
-  def initialize(msg="Currency codes are not the same. Convert your currency to continue.")
-   super
- end
-
+  def initialize(msg="Currency codes are not the same.", code = "code")
+    @code = code
+   super(msg)
+  end
 end
-
-raise DifferentCurrencyCodeError
