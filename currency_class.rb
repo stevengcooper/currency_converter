@@ -6,31 +6,27 @@ class Currency
     @amount = amount
   end
 
-  # def inside(code, amount)
-  #   @amount
-  #   @code
-  # end
-
-  def equal(other)
-    @code == other.code && @amount == other.amount
-    puts "DifferentCurrencyCodeError" if @code != other_code.code
+  def error(other)
+    if @code != other.code
+      puts "DifferentCurrencyCodeError"
   end
 
   def +(other)
-    @amount + other.amount if @code == other.code
+    @amount + other.amount if other.equal_to
   end
 
-  # def -(other_amount, other_code)
-  #   @amount - other_amount.inside if other_code.inside.check
-  #
-  # def *(other_amount, other_code)
-  #   @amount * other_amount.inside if other_code.inside.check
-  # end
+  def -(other)
+    @amount - other.amount if other.code.equal_to
+
+  def *(other)
+    @amount * other.amount if other_code.check
+  end
 end
 
 #
-dollar = Currency.new(:USD, 500)
+a = Currency.new(:USSR, 500)
 c = Currency.new(:USD, 600.08)
 puts c.amount
 puts c.code
-puts c + dollar
+puts c.amount + a.amount
+end
