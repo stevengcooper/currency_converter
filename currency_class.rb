@@ -1,12 +1,19 @@
 require './error_class.rb'
-require 'byebug'
+# require 'byebug'
 
 class Currency
-  attr_accessor :amount, :code
-
-  def initialize(code, amount)
+  attr_accessor :amount, :code, :hash
+  def initialize(code, amount = nil)
     @code = code
     @amount = amount
+    hash = {"!" => :GBP, "$" => :USD, "^" => :CNY}
+    if @code != nil && @amount == nil
+      breaker = code.split("",2)
+      @amount = breaker[1].to_f
+      @code = hash[breaker[0]]
+    else
+      puts "Your currency isn't entered in our data system."
+    end
   end
 
   def ==(other)
@@ -51,11 +58,3 @@ class Currency
     end
   end
 end
-
-a = Currency.new(:NAD, 500)
-c = Currency.new(:USD, 600.08)
-d = Currency.new(:USD, 10000)
-puts c * 5
-puts c + d
-puts d - c
-puts d / c
