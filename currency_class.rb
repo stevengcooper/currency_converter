@@ -19,7 +19,8 @@ class Currency
 
   def +(other)
     if @code == other.code
-      @amount = @amount + other.amount
+      new_amount = @amount + other.amount
+      new_wallet = Currency.new(@code, new_amount)
     else
       raise DifferentCurrencyCodeError
     end
@@ -27,7 +28,8 @@ class Currency
 
   def -(other)
     if @code == other.code
-      @amount = @amount - other.amount
+      new_amount = @amount - other.amount
+      new_wallet = Currency.new(@code, new_amount)
     else
       raise DifferentCurrencyCodeError
     end
@@ -35,7 +37,8 @@ class Currency
 
   def /(other)
     if @code = other.code
-      @amount = @amount / other.amount
+      new_amount = @amount / other.amount
+      new_wallet = Currency.new(@code, new_amount)
     else
       raise DifferentCurrencyCodeError
     end
@@ -52,7 +55,7 @@ end
 a = Currency.new(:NAD, 500)
 c = Currency.new(:USD, 600.08)
 d = Currency.new(:USD, 10000)
-e = c * 5
+puts c * 5
 puts c + d
 puts d - c
 puts d / c
