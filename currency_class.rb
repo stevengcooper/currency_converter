@@ -8,8 +8,10 @@ class Currency
     hash = {"!" => :GBP, "$" => :USD, "^" => :CNY}
     if @code != nil && @amount == nil
       breaker = code.split("",2)
-      amount = breaker[1].to_f
-      code = hash[breaker[0]]
+      @amount = breaker.join[1..-1]
+      symbol = breaker[0]
+      @code = hash[symbol]
+      puts "#{@code} #{@amount}"
     else
       "Something has gone terribly wrong."
     end
@@ -26,7 +28,7 @@ class Currency
   def +(other)
     if @code == other.code
       new_amount = @amount + other.amount
-      new_wallet = Currency.new(@code, new_amount)
+      Currency.new(@code, new_amount)
     else
       raise DifferentCurrencyCodeError
     end
@@ -58,9 +60,4 @@ class Currency
     end
   end
 end
-wallet = Currency.new("$4000")
-wallet2 = Currency.new(:USD, 600)
-puts wallet2.code
-puts wallet2.amount
-puts wallet.code
-puts wallet.amount
+wallet = Currency.new("$5000.00")
