@@ -1,18 +1,29 @@
 require './currency_class'
 
 class Conversion
-  attr_accessor :current_code :amount :desired_code :rate
+  attr_accessor :current_code, :amount, :rate, :desired_code
 
-  def initialize(current_code, amount, desired_code, rate)
+  def initialize(current_code, amount, rate, desired_code)
     @current_code = current_code
     @amount = amount
-    @desired_code = desired_code
     @rate = rate
+    @desired_code = current_code
     hash = {USD: 1.0, EUR: 0.74}
   end
 
   def convert(other)
-    if hash.include?(other.current_code)
-      rate = hash[other.current_code]
-      return rate * other.amount
-    elsif 
+    if hash.key?(other.current_code)
+      rate = hash[other.desired_code]
+      converted_amount= rate * other.amount
+      Currency.new(other.desired_code, converted_amount)
+    elsif !hash.has_key?(other.current_code)
+      converted_amount = other.rate * other.amount
+      hash[other.desired_code] = converted_amount
+
+      new_amount =
+      Currency.new(other.desired_code, converted_amount)
+    end
+  end
+end
+wallet1 = Conversion.new(:USD, 3000.00, 0.74, :GBP)
+puts wallet1
