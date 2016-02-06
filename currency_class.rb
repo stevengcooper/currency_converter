@@ -1,5 +1,4 @@
 require './error_class.rb'
-# require 'byebug'
 
 class Currency
   attr_accessor :amount, :code, :hash
