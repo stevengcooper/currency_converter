@@ -1,6 +1,5 @@
 require './currency_class.rb'
 require './error_class.rb'
-require 'byebug'
 
 class CurrencyConverter
   attr_accessor :rates, :amount
@@ -11,7 +10,8 @@ class CurrencyConverter
   def convert(other, desired_code)
     if @rates.include?(desired_code)
       rate_convert = @rates[desired_code]
-      Currency.new(desired_code, rate_convert * other.amount)
+      converted_amount = rate_convert * other.amount
+      converted_currency = Currency.new(desired_code, converted_amount)
     else
       raise DifferentCurrencyCodeError
     end

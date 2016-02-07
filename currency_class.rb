@@ -11,7 +11,7 @@ class Currency
       @amount = breaker.join[1..-1].to_f
       symbol = breaker[0]
       @code = hash[symbol]
-      Currency.new(@code, @amount)
+      new_currency = Currency.new(@code, @amount)
     else
       "Something has gone terribly wrong."
     end
@@ -27,7 +27,7 @@ class Currency
 
   def +(other)
     if @code == other.code
-      Currency.new(@amount + other.amount, @code)
+      new_currency = Currency.new(@amount + other.amount, @code)
     else
       raise DifferentCurrencyCodeError
     end
@@ -35,7 +35,7 @@ class Currency
 
   def -(other)
     if @code == other.code
-      Currency.new(@amount - other.amount, @code)
+      new_currency = Currency.new(@amount - other.amount, @code)
     else
       raise DifferentCurrencyCodeError
     end
@@ -43,7 +43,7 @@ class Currency
 
   def /(other)
     if @code = other.code
-      Currency.new(@amount / other.amount, @code)
+      new_currency = Currency.new(@amount / other.amount, @code)
     else
       raise DifferentCurrencyCodeError
     end
@@ -51,7 +51,7 @@ class Currency
 
   def *(number)
     if number.class == Fixnum || number.class == Float
-      Currency.new(@amount * number, @code)
+      new_currency = Currency.new(@amount * number, @code)
     else
       puts "You're trying to multiply something that isn't a Fixnum or Float."
     end
