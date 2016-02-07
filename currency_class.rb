@@ -1,19 +1,21 @@
 require './error_class.rb'
-
+require './main.rb'
+require './conversion_class.rb'
 class Currency
-  attr_accessor :code, :amount, :hash
+  attr_accessor :code, :amount, :hash, :rates
   def initialize(code, amount = nil)
     @code = code
     @amount = amount
     @hash = {"!" => :GBP, "$" => :USD, "^" => :CNY}
-    if @code != nil && @amount == nil
+    @rates = rates
+    if code != nil && amount == nil
       breaker = code.split("",2)
       @amount = breaker.join[1..-1].to_f
       symbol = breaker[0]
       @code = hash[symbol]
       new_currency = Currency.new(@code, @amount)
     else
-      "Something has gone terribly wrong."
+      puts "String was not present."
     end
   end
 
@@ -41,9 +43,11 @@ class Currency
     end
   end
 
-  def /(other)
-    if @code = other.code
-      new_currency = Currency.new(@amount / other.amount, @code)
+  def /(other, desired_code)
+    if @code != other.code
+      desired_rate = @rates[desired_code]
+      current_rate = @rates[other.code]
+      new_currency = Currency.new(current_rate / desired_rate)
     else
       raise DifferentCurrencyCodeError
     end
