@@ -41,10 +41,6 @@ class Currency
     end
   end
 
-  def /(other, desired_code)
-     new_currency = Currency.new(@amount / other.amount, @code)
-  end
-
   def *(number)
     if number.class == Fixnum || number.class == Float
       new_currency = Currency.new(@amount * number, @code)
