@@ -19,3 +19,8 @@ puts new_yen.amount
 puts new_yen.code
 puts new_euro.code
 puts new_euro.amount
+puts new_money.code
+puts new_money.amount
+c = new_money + new_yen
+puts c.amount
+puts c.code
