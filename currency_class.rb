@@ -1,13 +1,14 @@
-require './error_class.rb'
-require './main.rb'
-require './conversion_class.rb'
+require './error_class'
+# require './main'
+require './conversion_class'
+require 'byebug'
+
 class Currency
-  attr_accessor :code, :amount, :hash, :rates
+  attr_accessor :code, :amount, :hash
   def initialize(code, amount = nil)
     @code = code
     @amount = amount
     @hash = {"!" => :GBP, "$" => :USD, "^" => :CNY}
-    @rates = rates
     if code != nil && amount == nil
       breaker = code.split("",2)
       @amount = breaker.join[1..-1].to_f
@@ -44,13 +45,7 @@ class Currency
   end
 
   def /(other, desired_code)
-    if @code != other.code
-      desired_rate = @rates[desired_code]
-      current_rate = @rates[other.code]
-      new_currency = Currency.new(current_rate / desired_rate)
-    else
-      raise DifferentCurrencyCodeError
-    end
+     new_currency = Currency.new(@amount / other.amount, @code)
   end
 
   def *(number)
