@@ -1,25 +1,19 @@
-require './currency_class'
+require './currency_class.rb'
+require './error_class.rb'
+require 'byebug'
 
-class Conversion
-  attr_accessor :current_code, :amount, :rate, :desired_code
-
-  def initialize(current_code, amount, rate, desired_code)
-    @current_code = current_code
-    @amount = amount
-    @rate = rate
-    @desired_code = current_code
-    hash = {USD: 1.0, EUR: 0.74}
+class CurrencyConverter
+  attr_accessor :rates, :amount
+  def initialize(rates)
+    @rates = rates
   end
 
-  def convert(other)
-    if hash.key?(@desired_code)
-      rate_convert = hash[@desired_code]
-      converted_amount = rate_convert * @amount
-      Currency.new(@desired_code, converted_amount)
-    elsif !hash.has_key?(@desire_code)
-      converted_amount = @rate * @amount
-      hash[@desired_code] = @rate
-      Currency.new(@desired_code, converted_amount)
+  def convert(other, desired_code)
+    if @rates.include?(desired_code)
+      rate_convert = @rates[desired_code]
+      Currency.new(desired_code, rate_convert * other.amount)
+    else
+      raise DifferentCurrencyCodeError
     end
   end
 end
