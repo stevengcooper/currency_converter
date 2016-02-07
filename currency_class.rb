@@ -1,5 +1,4 @@
 require './error_class'
-# require './main'
 require './conversion_class'
 require 'byebug'
 
@@ -15,8 +14,6 @@ class Currency
       symbol = breaker[0]
       @code = hash[symbol]
       new_currency = Currency.new(@code, @amount)
-    else
-      puts "String was not present."
     end
   end
 
