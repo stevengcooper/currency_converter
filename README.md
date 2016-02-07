@@ -1,9 +1,9 @@
-### Currency Converter Code
+### **Currency Converter Code**
 **The program was built based on guidelines detailed in [this link](https://github.com/tiyd-rails-2016-01/currency_converter)*
 
-**The code allows for:
+**The code allows for:**
 * Creates an instance of currency.
-  *Stores currency instance's code and amount.
+  * Stores currency instance's code and amount.
 * Inputing strings with currency symbols, "$4000".
   * Outputs the instance with a currency code and amount
 * Addition and subtraction of Currency instances with the same currency code.
